@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Disable submit button if any input field is empty learn from stack overflow and Asif
+        const checkInput = () => {
+            const name = document.getElementById('name').value;
+            const roll_num = document.getElementById('roll-num').value;
+            const button = document.getElementById('button');
+            if( name === '' || roll_num === '' ){
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
+        };
+
+        const submitForm = () => {
+            const name = document.getElementById('name').value;
+            const roll_num =  document.getElementById('roll-num').value;
+            const button = document.getElementById('button');
+            const table = document.getElementById('table');
+            const newRow = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const rollCell = document.createElement('td');
+            nameCell.textContent = name;
+            rollCell.textContent = roll_num;
+            newRow.appendChild(nameCell);            
+            newRow.appendChild(rollCell);
+            table.appendChild(newRow);
+            document.getElementById('name').value = ''; 
+            document.getElementById('roll-num').value = '';
+            button.disabled = true;        
+
+        }
+    </script>
+</head>
+<body onload="checkInput()">
+    <div class="heading">
+        <h1>Put Student Detail's</h1>
+    </div>
+    <hr>
+    <form id="form" autocomplete="on">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter name..." oninput="checkInput()"><br><br>
+        <label for="roll-num">Roll Number:</label>
+        <input type="number" id="roll-num" placeholder="Enter roll number..." oninput="checkInput()"><br><br>
+        <input type="submit" value="submit" id="button" onclick="submitForm()">
+    </form>
+    <hr>
+    <h1 class="heading">Student's Information</h1>
+    <hr>
+    <table id="table">
+        <tr>
+            <th>Student Name</th>
+            <th>Roll No</th>
+        </tr>
+    </table>
+    
+
+</body>
+</html>
