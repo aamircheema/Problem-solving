@@ -6,6 +6,31 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        let students = [];
+
+        // Function to Retrieve stored data and populate the table
+
+        const populateTableFromLocalStorage = () =>{
+            const table = document.getElementById('table');
+            const storedStudents = JSON.parse(localStorage.getItem('students'));
+            if(storedStudents){
+                students = storedStudents;
+                for(const student of students) {
+                    const newRow = document.createElement('tr');
+                    const nameCell = document.createElement('td');
+                    const rollCell = document.createElement('td');
+                    nameCell.textContent = student.name;
+                    rollCell.textContent = student.roll_num;
+                    newRow.appendChild(nameCell);
+                    newRow.appendChild(rollCell);
+                    table.appendChild(newRow);                     
+                }
+            }
+        };
+        // Function to save data to local storage 
+        const saveDataToLocalStorage = (name, roll_num) => {
+            localStorage.setItem('students', JSON.stringify(students))
+        }
         // Disable submit button if any input field is empty learn from stack overflow and Asif
         const checkInput = () => {
             const name = document.getElementById('name').value;
@@ -17,7 +42,7 @@
                 button.disabled = false;
             }
         };
-        // learn from freecodecamp, stack overflow, mdn
+        // Function to handle form submission
         const submitForm = () => {
             const name = document.getElementById('name').value;
             const roll_num =  document.getElementById('roll-num').value;
@@ -33,9 +58,15 @@
             table.appendChild(newRow);
             document.getElementById('name').value = ''; 
             document.getElementById('roll-num').value = '';
-            button.disabled = true;        
-
+            button.disabled = true; 
+            students.push({name, roll_num}); 
+            saveDataToLocalStorage();      
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateTableFromLocalStorage();
+            checkInput();
+        });
     </script>
 </head>
 <body onload="checkInput()">
