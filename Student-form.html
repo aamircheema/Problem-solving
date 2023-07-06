@@ -10,7 +10,9 @@
         const STUDENT_STORAGE_KEY = "students";
         let students = [];
 
-        // Function to Retrieve stored data and populate the table (article by Dillion Megida on freecodecamp)
+        // Function to Retrieve stored data and populate the table
+        // Guide.
+        // https://blog.logrocket.com/localstorage-javascript-complete-guide/#:~:text=The%20del()%20function%20clears,list%2C%20and%20resets%20the%20itemsArray%20.
 
 
         const populateTableFromLocalStorage = () => {
@@ -27,6 +29,7 @@
                     newRow.appendChild(nameCell);
                     newRow.appendChild(rollCell);
                     table.appendChild(newRow);
+
                 }
             }
         };
@@ -66,19 +69,16 @@
                 searchResultsTable.appendChild(newRow);
                 document.getElementById('search-input').value = '';
 
-                setTimeout(() => {
-                    searchResultsTable.removeChild(newRow);
-                }, 10000);
+
             } else {
-                const searchResultsTable = document.getElementById('search-results');
+
                 document.getElementById('search-input').value = '';
-
-
-
+                alert(`This ${foundStudent.roll_num} Roll No is not include in the list`)
             }
 
             return false;
         };
+        // localStorage.clear();
 
         // Function to handle form submission
         const submitForm = () => {
@@ -104,13 +104,25 @@
         document.addEventListener('DOMContentLoaded', () => {
             populateTableFromLocalStorage();
             checkInput();
+            saveDataToLocalStorage();
+
         });
+
+        // Function to clear Search
+        // const clearSearch = () => {
+        //     const table = getElementById('search-results');
+        //     while (table.hasChildNodes()) {
+        //         table.removeChild(table.firstChild)
+        //     }
+        //     console.log(table);
+        // }
+
     </script>
 </head>
 
 <body onload="checkInput()">
     <div class="heading">
-        <h1>Put Student Detail's</h1>
+        <h1>Student Form</h1>
     </div>
     <hr>
     <form id="form" autocomplete="on">
@@ -122,7 +134,7 @@
     </form>
     <hr />
 
-    <h1 class="heading">Students Information</h1>
+    <h1 class="heading">Student's Information</h1>
     <hr>
     <form autocomplete="on">
         <label for="search-input">Roll number to search:</label>
@@ -134,19 +146,19 @@
     <table id="search-results">
         <h1 class="heading">Search Result</h1>
         <tr>
-            <th>Searched Student Name</th>
-            <th>Searched Roll No</th>
+            <th>Student Name</th>
+            <th>Roll No</th>
         </tr>
     </table>
+    <!-- <input type="submit" class="clear-search" value="Clear Search" id="clear-search" onclick="clearSearch()"> -->
     <hr>
 
     <table id="table">
-        <h1 class="heading">All Students</h1>
+        <h1 class="heading">All Student's</h1>
         <tr>
             <th>Student Name</th>
             <th>Roll No</th>
         </tr>
     </table>
 
-    
 </body>
