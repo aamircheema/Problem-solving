@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <script>
+        const STUDENT_STORAGE_KEY = "students";
         let students = [];
 
         // Function to Retrieve stored data and populate the table (article by Dillion Megida on freecodecamp)
 
-        const populateTableFromLocalStorage = () =>{
+
+        const populateTableFromLocalStorage = () => {
             const table = document.getElementById('table');
-            const storedStudents = JSON.parse(localStorage.getItem('students'));
-            if(storedStudents){
+            const storedStudents = JSON.parse(localStorage.getItem(STUDENT_STORAGE_KEY));
+            if (storedStudents) {
                 students = storedStudents;
-                for(const student of students) {
+                for (const student of students) {
                     const newRow = document.createElement('tr');
                     const nameCell = document.createElement('td');
                     const rollCell = document.createElement('td');
@@ -23,29 +26,64 @@
                     rollCell.textContent = student.roll_num;
                     newRow.appendChild(nameCell);
                     newRow.appendChild(rollCell);
-                    table.appendChild(newRow);                     
+                    table.appendChild(newRow);
                 }
             }
         };
         // Function to save data to local storage 
-        const saveDataToLocalStorage = (name, roll_num) => {
-            localStorage.setItem('students', JSON.stringify(students))
-        }
+
+        const saveDataToLocalStorage = () => {
+            localStorage.setItem(STUDENT_STORAGE_KEY, JSON.stringify(students));
+        };
         // Disable submit button if any input field is empty learn from stack overflow and Asif
+
         const checkInput = () => {
             const name = document.getElementById('name').value;
             const roll_num = document.getElementById('roll-num').value;
             const button = document.getElementById('button');
-            if( name === '' || roll_num === '' ){
+            if (name === '' || roll_num === '') {
                 button.disabled = true;
             } else {
                 button.disabled = false;
             }
         };
+        // Function to search student with roll no
+        const search = () => {
+            const data = JSON.parse(localStorage.getItem(STUDENT_STORAGE_KEY));
+            const searchRollNumber = document.getElementById("search-input").value;
+            const searchResultsTable = document.getElementById('search-results');
+
+            const foundStudent = data.find(s => s.roll_num === searchRollNumber);
+
+            if (foundStudent) {
+                const newRow = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const rollCell = document.createElement('td');
+                nameCell.textContent = foundStudent.name;
+                rollCell.textContent = foundStudent.roll_num;
+                newRow.appendChild(nameCell);
+                newRow.appendChild(rollCell);
+                searchResultsTable.appendChild(newRow);
+                document.getElementById('search-input').value = '';
+
+                setTimeout(() => {
+                    searchResultsTable.removeChild(newRow);
+                }, 10000);
+            } else {
+                const searchResultsTable = document.getElementById('search-results');
+                document.getElementById('search-input').value = '';
+
+
+
+            }
+
+            return false;
+        };
+
         // Function to handle form submission
         const submitForm = () => {
             const name = document.getElementById('name').value;
-            const roll_num =  document.getElementById('roll-num').value;
+            const roll_num = document.getElementById('roll-num').value;
             const button = document.getElementById('button');
             const table = document.getElementById('table');
             const newRow = document.createElement('tr');
@@ -53,15 +91,15 @@
             const rollCell = document.createElement('td');
             nameCell.textContent = name;
             rollCell.textContent = roll_num;
-            newRow.appendChild(nameCell);            
+            newRow.appendChild(nameCell);
             newRow.appendChild(rollCell);
             table.appendChild(newRow);
-            document.getElementById('name').value = ''; 
+            document.getElementById('name').value = '';
             document.getElementById('roll-num').value = '';
-            button.disabled = true; 
-            students.push({name, roll_num}); 
-            saveDataToLocalStorage();      
-        }
+            button.disabled = true;
+            students.push({ name, roll_num });
+            saveDataToLocalStorage();
+        };
 
         document.addEventListener('DOMContentLoaded', () => {
             populateTableFromLocalStorage();
@@ -69,6 +107,7 @@
         });
     </script>
 </head>
+
 <body onload="checkInput()">
     <div class="heading">
         <h1>Put Student Detail's</h1>
@@ -79,18 +118,38 @@
         <input type="text" id="name" placeholder="Enter name..." oninput="checkInput()"><br><br>
         <label for="roll-num">Roll Number:</label>
         <input type="number" id="roll-num" placeholder="Enter roll number..." oninput="checkInput()"><br><br>
-        <input type="submit" value="submit" id="button" onclick="submitForm()">
+        <input type="submit" value="Submit" id="button" onclick="submitForm()">
+    </form>
+    <hr />
+
+    <h1 class="heading">Students Information</h1>
+    <hr>
+    <form autocomplete="on">
+        <label for="search-input">Roll number to search:</label>
+        <input type="number" id="search-input" placeholder="Enter roll number..."><br><br>
+        <input type="submit" value="Search" id="search-button" onclick="return search()">
     </form>
     <hr>
-    <h1 class="heading">Student's Information</h1>
+
+    <table id="search-results">
+        <h1 class="heading">Search Result</h1>
+        <tr>
+            <th>Searched Student Name</th>
+            <th>Searched Roll No</th>
+        </tr>
+    </table>
     <hr>
+
     <table id="table">
+        <h1 class="heading">All Students</h1>
         <tr>
             <th>Student Name</th>
             <th>Roll No</th>
         </tr>
     </table>
-    
 
+    <script>
+        const table = document.getElementById('table');
+        const searchResultsTable = document.getElementById('search-results');
+    </script>
 </body>
-</html>
