@@ -6,17 +6,39 @@ const parentFunction = () => {
 
     const firstChildFunction = () => {
         const classYear = '8th Grade';
-        console.log(`${name} studied in ${schoolName}`); // Closure: name and schoolName variables are accessed
+        const section = 'A'; // New variable: section
+        console.log(`${name} studied in ${schoolName} in section ${section}`); // Closure: name, schoolName, and section variables are accessed
+
+        let roll_no; // Declare the roll_no variable
+
+        const setRollNumber = (rollNumber) => {
+            roll_no = rollNumber; // Assign value to roll_no
+        };
 
         const secondChildFunction = () => {
-            const roll_no = 1;
-            console.log(`${name} reading in ${classYear} in ${schoolName}`); // Closure: name, classYear, and schoolName variables are accessed
+            const shift = 'Morning'; // New variable: shift
+            console.log(`${name} reading in ${classYear} in ${schoolName} in section ${section} (${shift} shift)`); // Closure: name, classYear, schoolName, section, and shift variables are accessed
+            console.log(`Roll No: ${roll_no}`); // Closure: roll_no variable is accessed
         };
-        return secondChildFunction;
+
+        const displayRollNumber = () => {
+            console.log(`Roll No: ${roll_no}`); // Closure: roll_no variable is accessed
+        };
+
+        return { setRollNumber, secondChildFunction, displayRollNumber };
     };
-    return firstChildFunction;
+
+    const displaySchoolInfo = () => {
+        console.log(`School: ${schoolName}`); // Closure: schoolName variable is accessed
+    };
+
+    return { firstChildFunction, displaySchoolInfo };
 };
 
-const firstChild = parentFunction();
-const secondChild = firstChild();
-secondChild();
+const { firstChildFunction, displaySchoolInfo } = parentFunction();
+const { setRollNumber, secondChildFunction, displayRollNumber } = firstChildFunction();
+
+displaySchoolInfo();
+setRollNumber(1); // Set the roll number
+secondChildFunction();
+displayRollNumber();
