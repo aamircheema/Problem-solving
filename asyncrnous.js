@@ -53,4 +53,12 @@ const production = () => {
     }, 1000)
 };
 order(1, production);
-
+//Output
+// grapes was selected
+// The fruit has been chopped
+// water and ice added.
+// Start the machine
+// Ice Cream was placed on stick
+// chocolate as toppings
+// Serve Ice cream
+// Production has started
