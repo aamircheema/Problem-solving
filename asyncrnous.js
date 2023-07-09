@@ -14,8 +14,9 @@ console.log("Production has started")
 };
 order(production);
 // output
+//Order placed. Please call production
 //Production has started
-//strawberry was selected
+
 <-- End of call back example -->
 
 
