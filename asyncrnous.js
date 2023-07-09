@@ -1,4 +1,4 @@
-//N Callback example
+// Callback example
 let order = (call_production) =>{
 
 console.log("Order placed. Please call production")
