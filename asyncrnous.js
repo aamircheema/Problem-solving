@@ -150,7 +150,7 @@ order(2000, () => {
 // Serve Ice Cream
 // End of the day
 
-// // if is_shop_open = false then Output will be
+// // if is_shop_open = false or shop is closed then Output will be
 // Shop is closed
 // Customer left
 // End of the day
