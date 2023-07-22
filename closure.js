@@ -10,7 +10,7 @@ function outerFunction() {
     return innerFunction;
 }
 
-// Assigning the returned inner function to a variable
+// Assigning returned inner function to a variable
 var closure = outerFunction();
 closure();
 
