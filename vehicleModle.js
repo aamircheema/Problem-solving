@@ -24,12 +24,12 @@ const vehicleSchema = new mongoose.Schema({
     totalTimeInMonths: { type: Number, required: true },
     monthlyInstallment: { type: Number, required: true },
     totalMonthlyInstallmentPayment: { type: Number, required: true },
-    numberOfQuatrerInstallment: { type: Number, required: true }, // Corrected spelling
+    numberOfQuatrerInstallment: { type: Number, required: true },
     firstQuarterInstallment: { type: Number, required: true },
     secondQuarterInstallment: { type: Number, required: true },
     thirdQuarterInstallment: { type: Number, required: true },
-    ForthQuarterInstallment: { type: Number, required: true }, // Corrected spelling
-    fiveQuarterInstallment: { type: Number, required: true }, // Corrected spelling
+    ForthQuarterInstallment: { type: Number, required: true },
+    fifthQuarterInstallment: { type: Number, required: true },
     starttingDate: {
       year: { type: Number, required: true },
       month: { type: String, required: true },
