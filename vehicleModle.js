@@ -24,7 +24,7 @@ const vehicleSchema = new mongoose.Schema({
     totalTimeInMonths: { type: Number, required: true },
     monthlyInstallment: { type: Number, required: true },
     totalMonthlyInstallmentPayment: { type: Number, required: true },
-    numberOfQuatrerInstallment: { type: Number, required: true },
+    numberOfQuarterInstallment: { type: Number, required: true },
     firstQuarterInstallment: { type: Number, required: true },
     secondQuarterInstallment: { type: Number, required: true },
     thirdQuarterInstallment: { type: Number, required: true },
@@ -46,7 +46,7 @@ const vehicleSchema = new mongoose.Schema({
     fatherName: { type: String, required: true },
     idCardNumber: { type: String, required: true },
     address: { type: String, required: true },
-    phoneNumer: { type: String, required: true }, // Corrected spelling
+    phoneNumer: { type: String, required: true },
   },
   buyerPaymentPlan: {
     totalPrice: { type: Number, required: true },
@@ -54,12 +54,12 @@ const vehicleSchema = new mongoose.Schema({
     totalTimeInMonths: { type: Number, required: true },
     monthlyInstallment: { type: Number, required: true },
     totalMonthlyInstallmentPayment: { type: Number, required: true },
-    numberofQuatrerInstallment: { type: Number, required: true }, // Corrected spelling
+    numberofQuatrerInstallment: { type: Number, required: true }, 
     firstQuarterInstallment: { type: Number, required: true },
     secondQuarterInstallment: { type: Number, required: true },
     thirdQuarterInstallment: { type: Number, required: true },
-    ForthQuarterInstallment: { type: Number, required: true }, // Corrected spelling
-    fiveQuarterInstallment: { type: Number, required: true }, // Corrected spelling
+    ForthQuarterInstallment: { type: Number, required: true }, 
+    fiveQuarterInstallment: { type: Number, required: true }, 
     starttingDate: {
       year: { type: Number, required: true },
       month: { type: String, required: true },
@@ -68,7 +68,7 @@ const vehicleSchema = new mongoose.Schema({
     endingDate: {
       year: { type: Number, required: true },
       month: { type: String, required: true },
-      date: { type: Number, required: true }, // Changed to Number
+      date: { type: Number, required: true }, 
     },
   },
 });
