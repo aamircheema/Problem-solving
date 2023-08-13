@@ -1,4 +1,5 @@
-//Closure is a function that retains access to variables from its outer
+//Closure is a function that retains access 
+//to variables from its outer
 //scope even after the outer function has finished executing
 function outerFunction() {
     var outerVariable = 'Outer value';
